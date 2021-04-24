@@ -20,11 +20,20 @@ public class JdbcTemplateClassApp1 {
 
         // Creating seed data
         DaoUtils.createSeedData(dao);
-        List<Organization> orgs = dao.getAllOrganization();
 
-        for(Organization org:orgs){
-            System.out.println(org);
-        }
+        // List Organizations
+        List<Organization> orgs = dao.getAllOrganization();
+        DaoUtils.printOrganization(orgs, DaoUtils.readOperation);
+
+        // Create a new organization record
+        Organization org = new Organization("Nexxt", 1978, 19152, 2000, "Get Hired!");
+        boolean isCreated = dao.create(org);
+        DaoUtils.printSuccessFailure(DaoUtils.createOperation, isCreated);
+        DaoUtils.printOrganization(dao.getAllOrganization(), DaoUtils.createOperation);
+
+        // Cleanup
+        dao.cleanup();
+        DaoUtils.printOrganizationCount(dao.getAllOrganization(), DaoUtils.cleanupOperation);
 
         // Close application context
         ((ClassPathXmlApplicationContext) ctx).close();

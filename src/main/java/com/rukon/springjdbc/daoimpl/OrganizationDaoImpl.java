@@ -21,10 +21,10 @@ public class OrganizationDaoImpl implements OrganizationDao {
     }
 
     public boolean create(Organization org) {
-        String sqlQuery = "INSERT INTO organization (compnay_name, year_of_incorporation, postal_code, employee_count, slogan)"
-        + "VALUES(?, ?, ?, ?, ?)";
-        Object args = new Object[] {org.getCompanyName(), org.getYearOfIncorporation(), org.getPostalCode(), org.getEmployeeCount(),
-                org.getSlogan()};
+        String sqlQuery = "INSERT INTO organization (company_name, year_of_incorporation, postal_code, employee_count, slogan) " +
+                "VALUES(?, ?, ?, ?, ?)";
+        Object[] args = new Object[] { org.getCompanyName(), org.getYearOfIncorporation(), org.getPostalCode(),
+                org.getEmployeeCount(), org.getSlogan()};
         return jdbcTemplate.update(sqlQuery, args) == 1;
     }
 
